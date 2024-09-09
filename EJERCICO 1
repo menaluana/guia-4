@@ -1,0 +1,115 @@
+CLASE LIBRO
+import java.util.Objects;
+
+public class Libro {
+    private String autor;
+    private String titulo;
+    private double precio;
+    private int añoPublicacion;
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public int getAñoPublicacion() {
+        return añoPublicacion;
+    }
+
+    public void setAñoPublicacion(int añoPublicacion) {
+        this.añoPublicacion = añoPublicacion;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Libro libro = (Libro) o;
+        return Objects.equals(titulo, libro.titulo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(titulo);
+    }
+}
+
+CLASE TIENDA
+
+import java.util.ArrayList;
+
+public class Tienda  {
+    private ArrayList <Libro> stock;
+
+    public Tienda() {
+        this.stock = new ArrayList<>();
+    }
+
+    public void agregarElemnto (Libro elemento) {
+        stock.add(elemento);
+    }
+    public void eliminarElemento (Libro libroAborrar){
+        stock.remove(libroAborrar);
+    }
+    public String mostrarElementos (){
+        String muestra = new String();
+        for (Libro libros :stock) {
+            //el concat agrega al string la informacion de un libro y del proximo y el proximo...
+            muestra.concat(libros.toString() + " " );
+        }
+        return muestra;
+    }
+    public String buscarPorTitulo (String titulo){
+        Libro aux = new Libro();
+        aux.setTitulo(titulo);
+        int indice = 0;
+        if (stock.contains(aux)){
+            indice = stock.indexOf(aux);
+        } else {
+            return "No se encontro el libro!";
+        }
+        return "El libro fue encontrado en la posicion numero: " + stock.get(indice);
+    }
+
+    public void actualizarPrecio (double precioNuevo, String titulo){
+        for (Libro libros : stock) {
+            int indice = stock.indexOf(libros);
+            if (stock.get(indice).getTitulo().equals(titulo)) {
+                libros.setPrecio(precioNuevo);
+            }
+        }
+    }
+
+    public String calcularPrecioTotal (){
+        int acumulador = 0;
+        for (Libro libros : stock){
+            acumulador += libros.getPrecio();
+        }
+        return "El precio total del inventario es: $" + acumulador;
+    }
+
+    public String cantLibrosEnIventario (){
+        int contador = stock.size();
+        return "La cantidad de libros en el inventario es: " + contador;
+    }
+
+    
