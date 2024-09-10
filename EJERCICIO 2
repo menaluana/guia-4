@@ -1,0 +1,104 @@
+import java.util.Random;
+
+public class Persona {
+    protected long dni;
+    private String nombre;
+    private int edad;
+    private char sexo; // H o M
+    private double peso;
+    private double altura;
+
+    private static final char valorSexoPorDefault = 'h';
+    private static final int valorPesoPorDefault = 60;
+    private static final double valorAlturaPorDefault = 1.50 ;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public char getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(char sexo) {
+        this.sexo = sexo;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(double altura) {
+        this.altura = altura;
+    }
+
+    public Persona(String nombre, int edad, char sexo, double peso, double altura) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.sexo = sexo;
+        this.peso = peso;
+        this.altura = altura;
+        this.dni = generarDni();
+    }
+
+    public Persona (){
+        this.nombre = "";
+        this.edad = 0;
+        this.sexo = valorSexoPorDefault;
+        this.peso = 0;
+        this.altura = 0;
+        this.dni = 0;
+    }
+
+    public Persona (String nombre, int edad, char sexo){
+        this.nombre = nombre;
+        this.edad = edad;
+        this.sexo = sexo;
+        this.peso = valorPesoPorDefault;
+        this.altura = valorAlturaPorDefault;
+        this.dni = generarDni();
+    }
+
+    private long generarDni (){
+        Random random = new Random();
+        int numero = random.nextInt(10000000);
+
+        return numero;
+    }
+
+    public String calcularIMC (double peso, double altura){
+        int rta = 0;
+        double pesoCalculado = (peso / (altura * altura));
+        if (pesoCalculado <= 19){
+            rta = -1;
+        } else if (19 < pesoCalculado && pesoCalculado > 26){
+            rta = 0;
+        } else {
+            rta = 1;
+        }
+        return "Si su valor es -1 usted esta debado del peso normal, si es 0 tiene un peso normal y si es 1 tiene sobrepeso --> RESPUESTA:  " + rta;
+    }
+
+    
+
+}
