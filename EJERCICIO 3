@@ -1,0 +1,249 @@
+CLASE ALBUM
+
+import java.util.Objects;
+
+public class Album extends Artista {
+    String titulo;
+    int anio;
+    Artista artista;
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public int getAnio() {
+        return anio;
+    }
+
+    public void setAnio(int anio) {
+        this.anio = anio;
+    }
+
+    public Artista getArtista() {
+        return artista;
+    }
+
+    public void setArtista(Artista artista) {
+        this.artista = artista;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Album album = (Album) o;
+        return Objects.equals(titulo, album.titulo) && Objects.equals(artista, album.artista);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), titulo, artista);
+    }
+}
+
+CLASE ARTISTA
+import java.util.Objects;
+
+public class Artista {
+    String nombre;
+    int edad;
+    String nacionalidad;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public String getNacionalidad() {
+        return nacionalidad;
+    }
+
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artista artista = (Artista) o;
+        return edad == artista.edad && Objects.equals(nombre, artista.nombre) && Objects.equals(nacionalidad, artista.nacionalidad);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre);
+    }
+}
+
+CLASE CANCION
+
+import java.sql.Time;
+import java.util.Objects;
+
+public class Cancion extends Album {
+    String nombre;
+    Time duracion;
+    E_Generos genero;
+    Album album;
+    Artista artistaInvitado;
+
+    @Override
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Time getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(Time duracion) {
+        this.duracion = duracion;
+    }
+
+    public E_Generos getGenero() {
+        return genero;
+    }
+
+    public void setGenero(E_Generos genero) {
+        this.genero = genero;
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+
+    public Artista getArtistaInvitado() {
+        return artistaInvitado;
+    }
+
+    public void setArtistaInvitado(Artista artistaInvitado) {
+        this.artistaInvitado = artistaInvitado;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Cancion cancion = (Cancion) o;
+        return Objects.equals(nombre, cancion.nombre) && Objects.equals(album, cancion.album);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), nombre, album);
+    }
+}
+
+ENUM GENEROS
+public enum E_Generos {
+    ROCK,
+    TRAP,
+    JAZZ,
+    METAL,
+    CLASICO;
+}
+
+CLASE BIBLIOTECA_CANCIONES
+
+import java.util.ArrayList;
+
+public class Biblioteca_Canciones {
+    ArrayList <Cancion> listado = new ArrayList<Cancion>();
+
+    public void agregarCancion (Cancion x){
+
+    }
+    public void eliminarCancion (String titulo){
+
+    }
+    public void mostrar(){
+
+    }
+
+}
+
+iREPRODUCCION
+
+public interface iReproduccion {
+    public String reproducir();
+    public String añadirCancion(Cancion x);
+    public void eliminarCancion();
+    public String verLista();
+
+}
+
+LISTABASICA
+
+import java.util.Stack;
+
+public class ListaBasica implements iReproduccion {
+    String nombre;
+    Stack miLista;
+
+    public String reproducir(){
+        //mostrar, desapilar y enviar al final la primer cancion (tope) pila auxiliar
+    }
+    public String añadirCancion(Cancion x){
+        return "Para acceder a estas opciones, compre el paquete PREMIUM";
+    }
+    public void eliminarCancion(){
+        System.out.println("Para acceder a estas opciones, compre el paquete PREMIUM");
+
+    }
+    public String verLista(){
+        //mostrar toda la lista
+
+    }
+}
+
+LISTAPREMIUM
+
+import java.util.LinkedList;
+
+public class listaPremium implements iReproduccion {
+    String nombre;
+    LinkedList miLista; //LISTA DOBLEMENTE ENLAZADA
+
+    public String reproducir (){
+        //muestra la cancion que se esta reproduciendo
+    }
+    public String añadirCancion(Cancion x){
+
+    }
+    public void eliminarCancion(){
+        //el usuario ingresa que cancion eliminar (un numero) primero se la mostramos
+    }
+    public String verLista(){
+        //mostrar lista
+    }
+}
+
+MAIN
+ // debe tener acceso a a lista y a la biblioteca de canciones (recibirla de algun lado)
